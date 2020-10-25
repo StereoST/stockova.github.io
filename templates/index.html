@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+    <h3>Welcome {{ user }}</h3>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Stock</th>
+            <th scope="col">Quantity(Position)</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Cost/Share</th>
+            <th scope="col">Current Price</th>
+            <th scope="col">P&L Today</th>
+            <th scope="col">Unrealized P&L</th>
+            <th scope="col">Broker</th>
+          </tr>
+        </thead>
+    {% for i in range(stock_list|length) %}
+        <tr name={{stock_list[i].stock}}>
+            <td>{{stock_list[i].stock}}</td>
+            <td>{{stock_list[i].quantity}}</td>
+            <td>${{'%.02f' % ((stock_list[i].quantity | int) * (stock_list[i].price | float))}}</td>
+            <td>${{'%.02f' % stock_list[i].price | float}}</td>
+            <td>${{'%.02f' % price_list[i] | float}}</td>
+            <td>${{'%.02f' % (price_list[i] - close_price_list[i])}}</td>
+            <td>${{'%.02f' % ((price_list[i] | float - stock_list[i].price | float) * stock_list[i].quantity | int)}}</td>
+            <td>{{stock_list[i].broker}}</td>
+        </tr>
+    {% endfor %}
+    </ul>
+{% endblock %}

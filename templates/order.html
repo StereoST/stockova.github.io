@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Order
+{% endblock %}
+
+{% block main %}
+
+{% if message %}
+  <div class="alert alert-success" role="alert">
+    {{message}}
+  </div>
+{% endif %}
+
+<h3 style="text-align: left;">Order</h3>
+    <form method="POST" action="/order">
+        <div class="form-row">
+            <div class="form-col-md-6">
+                <label for="Input stock" class="col-sm-2 col-form-label">Stock</label>
+                <input type="text" class="form-control" name="stock">
+            </div>
+            <div class="form-col-md-4">
+                <label for="Input price" class="col-sm-2 col-form-label">Price</label>
+                <input type="text" class="form-control" name="price">
+            </div>
+            <div class="form-col-md-2">
+                <label for="Input price" class="col-sm-2 col-form-label">Quantity</label>
+                <input type="number" class="form-control" name="quantity">
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="broker" class="col-sm-2 col-form-label">Broker</label>
+            <select name="broker">
+                <option value="CS" selected>Charles Schwab</option>
+                <option value="IB">Interactive Brokers</option>
+                <option value="futu">FUTU</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="Order Type" class="col-sm-2 col-form-label">Order Type</label>
+
+            <div class="custom-control custom-radio custom-control-inline mt-2">
+                <input type="radio" id="customRadioInline1" name="type" class="custom-control-input" value="buy">
+                <label class="custom-control-label" for="customRadioInline1">Buy</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline mt-2">
+                <input type="radio" id="customRadioInline2" name="type" class="custom-control-input" value="sell">
+                <label class="custom-control-label" for="customRadioInline2">Sell</label>
+              </div>
+            </div>
+        </div>
+        
+        <button type=submit class="btn btn-primary">Submit</button> 
+    </form>
+{% endblock %}
